@@ -1,0 +1,40 @@
+1)mkdir repositorios
+  cd repositorios/
+  git clone https://github.com/TecnologoInformatico/AdmInf-web.git
+
+2)sudo apt update
+
+3)sudo apt install apache2
+
+4)cd /var/www/
+  sudo mkdir msellanes
+
+5)sudo chown ubuntu msellanes/
+  sudo chown ubuntu: msellanes
+  ls -l
+
+6).1)cd /etc/apache2/sites-available/
+  .2.3)sudo cp 000-default.conf msellanes.conf
+     sudo nano msellanes.conf(cambio los campos #ServerName (msellanes.tecnologoinformatico.com),#DocumentRoot (/var/www/msellanes))
+
+7)me dirigo a /etc/ (2 cd..)
+  sudo nano hosts(cambio localhost poner ip(en mi caso 168.138.133.31)y en la ultima linea 127.0.0.1 msellanes.tecnologoinformatico.com)
+  guardo(control X+Y) y salgo(control X).
+
+8)sudo systemctl reload apache2
+  sudo netfilter-persistent save
+  
+
+
+9)cp -r ~/repositorios/AdmInf-web/ /var/www/msellanes/
+
+10)sudo a2ensite msellanes.conf
+Mje:Enabling site msellanes.
+
+  curl msellanes.tecnologoinformatico.com
+  sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 80 -j ACCEPT
+
+11){
+    "serverName": "msellanes.tecnologoinformatico.com",
+    "ip": "168.138.133.31"
+}
